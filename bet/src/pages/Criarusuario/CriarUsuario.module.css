@@ -1,0 +1,351 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 20px;
+}
+
+.imageArea {
+    width: 30%;
+    max-width: 400px;
+    animation: fadeInLeft 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+  width: 100%;
+}
+
+.imageArea span {
+    /* Fundo preto-cinza sólido */
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    
+
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    
+    /* Espaçamento interno e borda sutil */
+    padding: 12px 24px;
+    border-radius: 8px;
+    border-bottom: 2px solid #555;
+    
+    /* Sombras para dar profundidade (estilo metal) */
+    text-shadow: 2px 2px 0 #000, 1px 1px 5px rgba(0,0,0,0.8);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    
+    /* Necessário para o pseudo-elemento do brilho */
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Efeito de luz passando (shine) */
+.imageArea span::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        115deg,
+        rgba(255,255,255,0) 10%,
+        rgba(255,255,255,0.4) 50%,
+        rgba(255,255,255,0) 90%
+    );
+    transform: rotate(25deg);
+    animation: shine 3.5s infinite ease-in-out;
+    pointer-events: none; /* permite clicar através do brilho */
+}
+
+/* Animação do brilho deslizando */
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(25deg);
+    }
+    20% {
+        transform: translateX(100%) rotate(25deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(25deg);
+    }
+}
+
+.image:hover {
+  transform: scale(1.02);
+}
+
+.formArea {
+  width: 40%;
+  max-width: 500px;
+  padding: 40px;
+  color: black;
+  backdrop-filter: blur(5px);
+  animation: fadeInRight 0.8s ease;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 10px ;
+  border: 2px solid #e0e0e0;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+  outline: none;
+  font-family: inherit;
+}
+
+.inputGroup input:focus {
+  border-color: #6be705;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+}
+
+.inputGroup input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Estilos base mantidos, apenas adições e ajustes */
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 15px;
+  color: #999;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 15px 20px 15px 45px; /* espaço para o ícone */
+  transition: all 0.3s ease;
+  background-color: #f8f9fc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  outline: none;
+  font-family: inherit;
+}
+
+.inputGroup input:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+}
+
+/* Botão de mostrar/ocultar senha */
+.eyeButton {
+  position: absolute;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 0;
+}
+
+.eyeButton:hover {
+  color: #764ba2;
+}
+
+/* Ícone de confirmação de senha (check/x) */
+.matchIcon {
+  position: absolute;
+  right: 50px; /* ao lado do olho */
+  display: flex;
+  align-items: center;
+}
+
+.checkIcon {
+  color: #22c55e;
+}
+
+.xIcon {
+  color: #ef4444;
+}
+
+/* Título com ícone */
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 12px;
+}
+
+.title svg {
+  color: #1dce0d;
+}
+
+/* Botão desabilitado estilizado */
+.buttonDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.spinner {
+  position: absolute;
+  right: 15px;
+  animation: spin 1s linear infinite;
+  color: #764ba2;
+}
+
+.checkIcon {
+  position: absolute;
+  right: 15px;
+  color: #22c55e;
+}
+
+.xIcon {
+  position: absolute;
+  right: 15px;
+  color: #ef4444;
+}
+
+.matchIcon {
+  position: absolute;
+  right: 50px;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Ajuste para não conflitar com o botão de olho */
+.inputGroup .eyeButton + .matchIcon,
+.inputGroup .eyeButton + .spinner,
+.inputGroup .eyeButton + .checkIcon,
+.inputGroup .eyeButton + .xIcon {
+  right: 50px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 500px) {
+  .inputIcon {
+    left: 12px;
+  }
+  .eyeButton {
+    right: 12px;
+  }
+  .matchIcon {
+    right: 45px;
+  }
+}
+
+.button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+  font-family: inherit;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+  }
+  .imageArea {
+    width: 60%;
+    max-width: 300px;
+  }
+  .formArea {
+    width: 80%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .formArea {
+    width: 95%;
+    padding: 20px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .inputGroup input {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  .button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
