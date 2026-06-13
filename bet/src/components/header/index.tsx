@@ -1,11 +1,13 @@
 // Header.jsx
 import { useState } from "react";
-import { Flame, LogIn, Menu, X } from "lucide-react";
+import { Flame, LogIn, Menu, X, User } from "lucide-react";
 import style from "./Header.module.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Header() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const { accessToken } = useAuth();
 
   return (
     <div className={style.ContainerHeader}>
@@ -33,8 +35,14 @@ function Header() {
 
       {/* Login */}
       <div className={style.Login}>
-        <Link to="/Login"><LogIn /> Entrar</Link>
-        <Link to="/cadastro">Registrar</Link>
+        {accessToken ? (
+          <Link to="/perfil"><User /> Minha Conta</Link>
+        ) : (
+          <>
+            <Link to="/Login"><LogIn /> Entrar</Link>
+            <Link to="/cadastro">Registrar</Link>
+          </>
+        )}
       </div>
 
       {/* Menu MOBILE que aparece quando clica no botão */}

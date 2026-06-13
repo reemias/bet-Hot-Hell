@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
   res.json({
     accessToken,
     csrfToken,
-    usuario: { id: usuario._id, username: usuario.username, email: usuario.email }
+    usuario: { id: usuario._id, username: usuario.username, email: usuario.email, chavePix: usuario.chavePix }
   });
 });
 
@@ -91,9 +91,44 @@ router.post('/logout', async (req, res) => {
   res.json({ message: 'Logout realizado com sucesso' });
 });
 
-// Exemplo de rota protegida (qualquer rota que precisa de autenticação)
+// GET /api/auth/perfil – retorna dados do usuário autenticado
 router.get('/perfil', authWithCsrf, async (req, res) => {
   const usuario = await Usuario.findById(req.usuarioId).select('-senhaHash');
+  if (!usuario) return res.status(404).json({ erro: 'Usuário não encontrado' });
+  res.json(usuario);
+});
+
+// PATCH /api/auth/perfil – atualiza chave PIX e/ou email
+router.patch('/perfil', authWithCsrf, async (req, res) => {
+  const { chavePix, email } = req.body;
+  const update = {};
+
+  if (chavePix !== undefined) {
+    const chave = String(chavePix).trim();
+    if (chave.length > 0 && chave.length > 50) {
+      return res.status(400).json({ erro: 'Chave PIX inválida' });
+    }
+    if (chave) {
+      const existe = await Usuario.findOne({ chavePix: chave, _id: { $ne: req.usuarioId } });
+      if (existe) return res.status(409).json({ erro: 'Chave PIX já cadastrada' });
+    }
+    update.chavePix = chave;
+  }
+
+  if (email !== undefined) {
+    const novoEmail = String(email).trim().toLowerCase();
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(novoEmail);
+    if (!emailValido) return res.status(400).json({ erro: 'Email inválido' });
+    const existe = await Usuario.findOne({ email: novoEmail, _id: { $ne: req.usuarioId } });
+    if (existe) return res.status(409).json({ erro: 'Email já cadastrado' });
+    update.email = novoEmail;
+  }
+
+  if (Object.keys(update).length === 0) {
+    return res.status(400).json({ erro: 'Nenhum dado para atualizar' });
+  }
+
+  const usuario = await Usuario.findByIdAndUpdate(req.usuarioId, update, { new: true }).select('-senhaHash');
   res.json(usuario);
 });
 

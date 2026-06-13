@@ -1,0 +1,248 @@
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  color: #e8eaed;
+  font-family: system-ui, sans-serif;
+}
+
+.carregando {
+  text-align: center;
+  color: #9aa0a6;
+  padding: 3rem 0;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.6rem;
+  color: #f97316;
+  margin: 0;
+}
+
+.botaoSair {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: #e8eaed;
+  border: 1px solid #2d3139;
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.botaoSair:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.card {
+  background: #1a1d24;
+  border: 1px solid #2d3139;
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.cardCabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.cardCabecalho h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  margin: 0;
+  color: #f5f5f5;
+}
+
+.iconeBotao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #252932;
+  color: #9aa0a6;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.iconeBotao:hover {
+  color: #f97316;
+  background: #2d3139;
+}
+
+.saldos {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.saldoItem {
+  flex: 1;
+  background: #11141a;
+  border: 1px solid #2d3139;
+  border-radius: 10px;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.saldoLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: #9aa0a6;
+}
+.saldoValor {
+  font-size: 1.5rem;
+  color: #f97316;
+}
+
+.botaoPrimario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  background: #f97316;
+  color: #11141a;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.botaoPrimario:hover {
+  background: #fb8a3c;
+}
+.botaoPrimario:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.botaoSecundario {
+  background: transparent;
+  color: #e8eaed;
+  border: 1px solid #2d3139;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+.botaoSecundario:hover {
+  border-color: #9aa0a6;
+}
+
+.conversao {
+  margin-top: 1.25rem;
+  border-top: 1px solid #2d3139;
+  padding-top: 1rem;
+}
+.conversao h3 {
+  font-size: 1rem;
+  margin: 0 0 0.25rem;
+}
+.dica {
+  font-size: 0.78rem;
+  color: #9aa0a6;
+  margin: 0 0 0.75rem;
+}
+.conversaoForm {
+  display: flex;
+  gap: 0.5rem;
+}
+.conversaoForm input {
+  flex: 1;
+  min-width: 0;
+}
+.conversaoForm button {
+  background: #252932;
+  color: #f97316;
+  border: 1px solid #f97316;
+  border-radius: 10px;
+  padding: 0 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.conversaoForm button:hover:not(:disabled) {
+  background: #f97316;
+  color: #11141a;
+}
+.conversaoForm button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.campo {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #23262d;
+}
+.campoLabel {
+  color: #9aa0a6;
+  font-size: 0.85rem;
+}
+.campoValor {
+  color: #e8eaed;
+  text-align: right;
+  word-break: break-all;
+}
+
+.campoEdit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0.6rem 0;
+}
+
+.acoesEdit {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'] {
+  background: #11141a;
+  border: 1px solid #2d3139;
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  color: #e8eaed;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='number']:focus {
+  border-color: #f97316;
+}

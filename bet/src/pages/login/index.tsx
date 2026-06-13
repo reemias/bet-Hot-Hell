@@ -16,7 +16,7 @@ export default function Login() {
     try {
       await login(username, password);
       await showSuccess('Login efetuado!', 'Bem-vindo de volta.');
-      navigate('/');
+      navigate('/perfil');
     } catch (err: any) {
       await showError('Falha no login', err.message);
     } finally {

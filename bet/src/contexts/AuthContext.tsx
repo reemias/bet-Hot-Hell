@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       'Content-Type': 'application/json',
     };
 
-    let response = await fetch(url, { ...options, headers });
+    let response = await fetch(url, { ...options, headers, credentials: 'include' });
 
     const newCsrf = response.headers.get('X-New-CSRF-Token');
     if (newCsrf && accessToken) {
@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           'X-CSRF-Token': localStorage.getItem('csrfToken')!,
           'Content-Type': 'application/json',
         };
-        response = await fetch(url, { ...options, headers: newHeaders });
+        response = await fetch(url, { ...options, headers: newHeaders, credentials: 'include' });
       } else {
         await logout();
         throw new Error('Sessão expirada, faça login novamente');
@@ -70,7 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const attemptRefresh = async (): Promise<boolean> => {
     try {
-      const res = await fetch('/api/auth/refresh', { method: 'POST' });
+      const res = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'include' });
       if (!res.ok) return false;
       const data = await res.json();
       atualizarTokens(data.accessToken, data.csrfToken);
@@ -84,7 +84,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const res = await fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
+      credentials: 'include',
+      body: JSON.stringify({ username, senha: password }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.erro || 'Erro no login');
@@ -93,7 +94,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).catch(() => {});
     setAccessToken(null);
     setCsrfToken(null);
     setUser(null);
