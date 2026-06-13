@@ -6,6 +6,8 @@ import Layout from "./components/Layout";
 import Cadastro from "./pages/Cadastro"
 import VerificarCodigo from "./pages/VerificarCodigo";
 import Criar_usuario from "./pages/Criarusuario";
+import Perfil from "./pages/Perfil";
+import ComprarMoedas from "./pages/ComprarMoedas";
 import { useAuth } from './contexts/AuthContext';
 
 // Componente de rota privada (protegida)
@@ -23,16 +25,24 @@ function Router() {
         
           <Route path="/" element={<Home />} />
           
-          {/*rotas privadas ainda não descidi quais serão essa*/}
-          <Route 
-            path="/" 
+          {/*rotas privadas*/}
+          <Route
+            path="/perfil"
             element={
               <PrivateRoute>
-                <Home />
+                <Perfil />
               </PrivateRoute>
-            } 
+            }
           />
-          
+          <Route
+            path="/comprar"
+            element={
+              <PrivateRoute>
+                <ComprarMoedas />
+              </PrivateRoute>
+            }
+          />
+
         </Route>
 
         {/*rotas sem o header como padrão*/}

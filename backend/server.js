@@ -17,9 +17,10 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
       return callback(new Error('CORS não permitido'));
     },
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: false,
+    methods: ['GET', 'POST', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+    exposedHeaders: ['X-New-CSRF-Token'],
+    credentials: true,
   })
 );
 app.use(express.json({ limit: '10kb' }));
@@ -61,6 +62,12 @@ app.use('/api/cadastro', cadastroRoutes);
 
 const authRoutes = require('./router/auth');
 app.use('/api/auth', authRoutes);
+
+const carteiraRoutes = require('./router/carteira');
+app.use('/api/carteira', carteiraRoutes);
+
+const comprasRoutes = require('./router/compras');
+app.use('/api/compras', comprasRoutes);
 
 /** @type {import('express').ErrorRequestHandler} */
 const errorHandler = (err, req, res, next) => {
